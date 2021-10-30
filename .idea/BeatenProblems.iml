@@ -9,7 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/OOD" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main/java" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="openjdk-17" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
