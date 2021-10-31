@@ -1,4 +1,4 @@
-package dataStructure;
+package moBanMen;
 
 public class SegmentTree {
     public class SegmentTreeNode{
