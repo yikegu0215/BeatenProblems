@@ -49,5 +49,43 @@ public class MergeK {
     }
 
     //mergeSort
+    public static int[] mergeSort(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return nums;
+        }
+        int left = 0;
+        int right = nums.length - 1;
+        merge(nums, left, right);
+        return nums;
+    }
+    private static void merge(int[] nums, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int mid = left + (right - left) / 2;
+        merge(nums, left, mid);
+        merge(nums, mid + 1, right);
+        int i = left;
+        int j = mid + 1;
+        int p = 0;
+        int[] temp = new int[right - left + 1];
+        while (i <= mid && j <= right) {
+            if (nums[i] < nums[j]) {
+                temp[p++] = nums[i++];
+            }else {
+                temp[p++] = nums[j++];
+            }
+        }
+        while (i <= mid) {
+            temp[p++] = nums[i++];
+        }
+        while (j <= right) {
+            temp[p++] = nums[j++];
+        }
+        for (int k = 0; k < temp.length; k++) {
+            nums[k + left] = temp[k];
+        }
+
+    }
 
 }

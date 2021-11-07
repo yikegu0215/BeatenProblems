@@ -93,4 +93,72 @@ public class TopK {
     }
 
     //bucket sort (words- trie)
+    public static int[] bucketSort(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return nums;
+        }
+
+        int min = nums[0];
+        int max = nums[0];
+        for (int num : nums) {
+            min = Math.min(min, num);
+            max = Math.max(max, num);
+        }
+
+        int[] bucket = new int[max - min + 1];
+        for (int num : nums) {
+            bucket[num - min] ++;
+        }
+
+        int index = 0;
+        for (int i = 0; i < bucket.length; i++) {
+            while (bucket[i] > 0) {
+                nums[index] = i + min;
+                index++;
+                bucket[i]--;
+            }
+        }
+        return nums;
+    }
+
+    //quicksort
+    public static int[] quickSort(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return nums;
+        }
+        int left = 0;
+        int right = nums.length - 1;
+        quick(nums, left, right);
+        return nums;
+    }
+
+    private static void quick(int[] nums, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int mid = left + (right - left) / 2;
+        int target = nums[mid];
+        swap(nums, left, mid);
+        int i = left + 1;
+        int j = right;
+        while (i <= j) {
+            if (nums[i] <= target) {
+                i++;
+            }else if (nums[j] > target) {
+                j--;
+            }else {
+                swap(nums,i,j);
+            }
+        }
+        swap(nums, left, j);
+        quick(nums, left, j);
+        quick(nums, i, right);
+    }
+
+    private static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
 }
