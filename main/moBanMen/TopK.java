@@ -30,7 +30,49 @@ public class TopK {
     }
 
 
+//QuickSelect with Duplicates, Kth largest element in Array
+public int findKthLargest(int[] nums, int k) {
+    if(nums == null || nums.length == 0 || k <= 0) {
+        throw new IllegalArgumentException();
+    }
+    int left = 0;
+    int right = nums.length - 1;
 
+    return quickselect(nums, k, left, right);
+}
+
+    private int quickselect(int[] nums, int k, int left, int right) {
+        int mid = left + (right - left ) / 2;
+        int pivot = nums[mid];
+
+        int i = left;
+        int j = right;
+        int t = left;
+        while(t <= j) {
+            if(nums[t] < pivot) {
+                swap(nums,i++,t++);
+            }else if (nums[t] > pivot) {
+                swap(nums,j--,t);
+            }else{
+                t++;
+            }
+        }
+
+        if(right - j >= k) {
+            return quickselect(nums, k,j + 1, right);
+        }else if (right - i + 1 >= k) {
+            return pivot;
+        }else{
+            return quickselect(nums, k -(right - i + 1), left, i - 1);
+        }
+
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
 
     //QuickSelect
     public int[] topKFrequent2(int[] nums, int k) {
